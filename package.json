@@ -1,0 +1,40 @@
+{
+  "name": "gallery",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -c yellow,magenta,cyan 'npm run css:dev' 'npm run app:dev' 'npm run mails:dev'",
+    "start": "concurrently -c yellow,magenta,cyan 'npm run app:start' 'npm run mails:start'",
+    "css:dev": "tailwindcss -i src/app/styles/input.css -o ./public/styles/output.css --watch",
+    "css:build": "tailwindcss -i src/app/styles/input.css -o ./public/styles/output.css",
+    "ts:build": "tsc",
+    "types:check": "tsc -noEmit",
+    "build": "npm run css:build && npm run ts:build",
+    "app:dev": "tsx watch src/app/server.ts",
+    "app:start": "NODE_ENV=production node dist/app/server.js",
+    "mails:dev": "tsx watch src/workers/send-mails.ts",
+    "mails:start": "NODE_ENV=production node dist/workers/send-mails.js",
+    "delete-unclaimed:dev": "tsx src/workers/crons/delete-unclaimed.ts",
+    "delete-unclaimed:start": "NODE_ENV=production node dist/workers/crons/delete-unclaimed.js",
+    "db": "tsx node_modules/drizzle-kit/bin.cjs",
+    "format": "prettier --write src/**/*.{ts,tsx,json}"
+  },
+  "dependencies": {
+    "@cloudamqp/amqp-client": "^3.1.1",
+    "@hono/node-server": "^1.13.2",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.36",
+    "hono": "^4.6.6",
+    "pg": "^8.13.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "@types/pg": "^8.11.10",
+    "concurrently": "^9.1.0",
+    "drizzle-kit": "^0.27",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.14",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}
