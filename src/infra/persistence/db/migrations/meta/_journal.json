@@ -29,6 +29,13 @@
       "when": 1731318336669,
       "tag": "0003_add-roles",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1731320968164,
+      "tag": "0004_damp_roughhouse",
+      "breakpoints": true
     }
   ]
 }

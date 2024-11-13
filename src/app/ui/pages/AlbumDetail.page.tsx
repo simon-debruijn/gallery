@@ -15,7 +15,13 @@ export function AlbumDetailPage(props: Props) {
       class="flex flex-col gap-3"
     >
       <label htmlFor="#requester-email"></label>
-      <input id="requester-email" name="email" type="email" required></input>
+      <input
+        id="requester-email"
+        name="email"
+        type="email"
+        required
+        class="text-black"
+      ></input>
       <button
         type="submit"
         className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-lg font-medium transition-colors"
@@ -26,7 +32,7 @@ export function AlbumDetailPage(props: Props) {
   );
 
   return (
-    <Layout>
+    <>
       <a href="/">{"< home"}</a>
       <h2 class="text-6xl">{props.title}</h2>
       <div>{props.id}</div>
@@ -35,6 +41,6 @@ export function AlbumDetailPage(props: Props) {
       ) : (
         <div>(being) claimed</div>
       )}
-    </Layout>
+    </>
   );
 }

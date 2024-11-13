@@ -1,8 +1,13 @@
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
-import { albumRouter } from "./albums/album.controller.js";
+import { albumsController } from "./albums/album.controller.js";
 import { LandingPage } from "./ui/pages/Landing.page.js";
 import { type DB, db } from "../infra/persistence/db/index.js";
+import { usersController } from "./users/users.controller.js";
+import { jsxRenderer } from "hono/jsx-renderer";
+import { Layout } from "./ui/layouts/Layout.js";
+import { getCookie } from "hono/cookie";
+import * as jwt from "hono/jwt";
 
 type Variables = {
   db: DB;
@@ -21,9 +26,19 @@ app.use(async (c, next) => {
 
 app.use("/public/*", serveStatic({ root: "." }));
 
-app.get("/", (c) => c.html(<LandingPage />));
+app.use("*", (c, next) => {
+  return jsxRenderer(({ children }) => {
+    const token = getCookie(c, "token");
+    const user = token ? jwt.decode(token ?? "").payload : undefined;
+    // @ts-expect-error
+    return <Layout user={user}>{children}</Layout>;
+  })(c, next);
+});
 
-app.route("/albums", albumRouter);
+app.get("/", (c) => c.render(<LandingPage />));
+
+app.route("/albums", albumsController);
+app.route("/users", usersController);
 
 app.onError((err, c) => {
   console.error(err);

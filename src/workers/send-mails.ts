@@ -6,12 +6,10 @@ import { AlbumStatus } from "../app/albums/AlbumStatus.js";
 import { updateStatusAlbum } from "../infra/persistence/repositories/albums.repo.js";
 
 await createConsumer(AlbumEvent.ClaimRequested, async ({ payload }) => {
-  const result = await updateStatusAlbum(
+  await updateStatusAlbum(
     { db },
     { id: payload.id, status: AlbumStatus.CLAIM_REQUESTED },
   );
-
-  console.log("result", result);
 
   console.log("should send mail to", payload.email);
 });

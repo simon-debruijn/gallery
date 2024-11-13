@@ -18,10 +18,6 @@ const port = ENV.PORT ?? 3001;
 
     console.log(`Server is running on http://localhost:${port}`);
   } catch (error) {
-    if (error instanceof AMQPError) {
-      console.error(error.message);
-    } else {
-      console.error(error);
-    }
+    console.error(error);
   }
 })();
