@@ -16,7 +16,7 @@
     "delete-unclaimed:dev": "tsx src/workers/crons/delete-unclaimed.ts",
     "delete-unclaimed:start": "NODE_ENV=production node dist/workers/crons/delete-unclaimed.js",
     "db": "tsx node_modules/drizzle-kit/bin.cjs",
-    "format": "prettier --write src/**/*.{ts,tsx,json}"
+    "format": "prettier --write 'src/**/*.{ts,tsx,json}'"
   },
   "dependencies": {
     "@cloudamqp/amqp-client": "^3.1.1",
