@@ -1,5 +1,14 @@
 import * as jwt from "hono/jwt";
-import type { Role } from "../users/Role.js";
+import { Role } from "../users/Role.js";
+import { z } from "zod";
+
+const userDetailsSchema = z.object({
+  sub: z.number(),
+  role: z.nativeEnum(Role),
+  exp: z.number(),
+});
+
+export type UserDetails = z.infer<typeof userDetailsSchema>;
 
 export async function signToken(
   { id, role }: { id: number; role: Role },
@@ -17,4 +26,11 @@ export async function signToken(
     },
     "secret",
   );
+}
+
+export function decodeToken(token: string | undefined) {
+  if (!token) return;
+
+  const { payload } = jwt.decode(token);
+  return userDetailsSchema.parse(payload);
 }
