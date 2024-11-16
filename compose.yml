@@ -4,7 +4,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
   queue:
     image: rabbitmq:4-alpine
     hostname: jobs
