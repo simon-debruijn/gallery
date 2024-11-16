@@ -1,6 +1,6 @@
 import { pgTable, integer, varchar } from "drizzle-orm/pg-core";
 import { timestamps } from "../helpers/timestamps.js";
-import { Role } from "../../../../app/users/Role.js";
+import { Role } from "../../../../app/domain/users/Role.js";
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),

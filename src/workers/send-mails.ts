@@ -2,7 +2,7 @@ import "dotenv/config";
 import { createConsumer } from "../infra/eventing/createConsumer.js";
 import { AlbumEvent } from "../infra/eventing/albums.js";
 import { db } from "../infra/persistence/db/index.js";
-import { AlbumStatus } from "../app/albums/AlbumStatus.js";
+import { AlbumStatus } from "../app/domain/albums/AlbumStatus.js";
 import { updateStatusAlbum } from "../infra/persistence/repositories/albums.repo.js";
 
 await createConsumer(AlbumEvent.ClaimRequested, async ({ payload }) => {

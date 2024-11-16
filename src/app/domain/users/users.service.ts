@@ -1,8 +1,8 @@
-import { signToken } from "../utils/jwt.js";
+import { signToken } from "../../utils/jwt.js";
 import { setCookie } from "hono/cookie";
 import type { Role } from "./Role.js";
 import type { Context } from "hono";
-import type { AppEnv } from "../app.js";
+import type { AppEnv } from "../../app.js";
 
 const TOKEN_EXP_IN_MINUTES = 5;
 

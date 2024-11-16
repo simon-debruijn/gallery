@@ -2,7 +2,7 @@ import { albumsTable } from "../db/tables/albums.table.js";
 import assert from "assert";
 import { and, eq, isNull, sql } from "drizzle-orm";
 import { type DB } from "../db/index.js";
-import { AlbumStatus } from "../../../app/albums/AlbumStatus.js";
+import { AlbumStatus } from "../../../app/domain/albums/AlbumStatus.js";
 
 export async function createNewAlbum(
   { db }: { db: DB },

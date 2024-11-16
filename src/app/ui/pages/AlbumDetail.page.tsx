@@ -1,4 +1,4 @@
-import { AlbumStatus } from "../../albums/AlbumStatus.js";
+import { AlbumStatus } from "../../domain/albums/AlbumStatus.js";
 
 type Props = {
   title: string;

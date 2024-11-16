@@ -1,13 +1,13 @@
 import { Hono } from "hono";
-import type { AppEnv } from "../app.js";
-import { LoginPage } from "../ui/pages/LoginPage.js";
-import { RegisterPage } from "../ui/pages/RegisterPage.js";
-import { comparePassword, encryptPassword } from "../utils/password.js";
+import type { AppEnv } from "../../app.js";
+import { LoginPage } from "../../ui/pages/LoginPage.js";
+import { RegisterPage } from "../../ui/pages/RegisterPage.js";
+import { comparePassword, encryptPassword } from "../../utils/password.js";
 import { setToken } from "./users.service.js";
 import {
   findUserByEmail,
   insertUser,
-} from "../../infra/persistence/repositories/users.repo.js";
+} from "../../../infra/persistence/repositories/users.repo.js";
 
 export const usersController = new Hono<AppEnv>();
 

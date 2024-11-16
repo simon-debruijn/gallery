@@ -1,10 +1,13 @@
 import { Hono } from "hono";
-import type { AppEnv } from "../app.js";
-import { getAlbumById } from "../../infra/persistence/repositories/albums.repo.js";
+import type { AppEnv } from "../../app.js";
+import { getAlbumById } from "../../../infra/persistence/repositories/albums.repo.js";
 import { createRandomAlbum } from "./albums.service.js";
-import { AlbumDetailPage } from "../ui/pages/AlbumDetail.page.js";
-import { AlbumEvent, createAlbumEvent } from "../../infra/eventing/albums.js";
-import { publishEvent } from "../../infra/eventing/queueEvent.js";
+import { AlbumDetailPage } from "../../ui/pages/AlbumDetail.page.js";
+import {
+  AlbumEvent,
+  createAlbumEvent,
+} from "../../../infra/eventing/albums.js";
+import { publishEvent } from "../../../infra/eventing/queueEvent.js";
 
 export const albumsController = new Hono<AppEnv>();
 

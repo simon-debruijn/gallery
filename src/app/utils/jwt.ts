@@ -1,5 +1,5 @@
 import * as jwt from "hono/jwt";
-import { Role } from "../users/Role.js";
+import { Role } from "../domain/users/Role.js";
 import { z } from "zod";
 
 const userDetailsSchema = z.object({
