@@ -1,5 +1,3 @@
-import { Layout } from "../layouts/Layout.js";
-
 export function RegisterPage() {
   return (
     <form method="post" action="/users/register" class="flex flex-col gap-3">

@@ -1,5 +1,3 @@
-import { Layout } from "../layouts/Layout.js";
-
 export function LoginPage(props: { email?: string }) {
   return (
     <form method="post" action="/users/login" class="flex flex-col gap-3">

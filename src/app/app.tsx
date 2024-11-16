@@ -29,7 +29,7 @@ app.use("/public/*", serveStatic({ root: "." }));
 app.use("*", (c, next) => {
   return jsxRenderer(({ children }) => {
     const token = getCookie(c, "token");
-    const user = token ? jwt.decode(token ?? "").payload : undefined;
+    const user = token ? jwt.decode(token).payload : undefined;
     // @ts-expect-error
     return <Layout user={user}>{children}</Layout>;
   })(c, next);

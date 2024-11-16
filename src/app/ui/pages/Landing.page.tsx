@@ -1,5 +1,3 @@
-import { Layout } from "../layouts/Layout.js";
-
 export function LandingPage() {
   return (
     <main class="text-center space-y-8 p-4">

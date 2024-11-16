@@ -5,6 +5,7 @@ type Props = PropsWithChildren<{
 }>;
 
 export const Layout: FC<Props> = function (props) {
+  console.log({ props });
   return (
     <html>
       <head>
