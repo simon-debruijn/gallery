@@ -1,11 +1,11 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
+import type { UserDetails } from "../../utils/jwt.js";
 
 type Props = PropsWithChildren<{
-  user?: { sub: number; role: string };
+  currentUser?: UserDetails;
 }>;
 
 export const Layout: FC<Props> = function (props) {
-  console.log({ props });
   return (
     <html>
       <head>
@@ -16,14 +16,15 @@ export const Layout: FC<Props> = function (props) {
       </head>
       <body class="bg-gray-950 text-gray-50 flex flex-col items-center min-h-screen">
         <div>
-          {!props.user ? (
+          {!props.currentUser ? (
             <nav class="flex gap-3 items-center">
               <a href="/users/login">login</a>
               <a href="/users/register">register</a>
             </nav>
           ) : (
             <div>
-              Hello {props.user.role.toLowerCase()} {props.user.sub}
+              Hello {props.currentUser.role.toLowerCase()}{" "}
+              {props.currentUser.sub}
             </div>
           )}
         </div>

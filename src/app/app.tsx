@@ -2,15 +2,16 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { albumsController } from "./albums/album.controller.js";
 import { LandingPage } from "./ui/pages/Landing.page.js";
-import { type DB, db } from "../infra/persistence/db/index.js";
+import { type DB } from "../infra/persistence/db/index.js";
 import { usersController } from "./users/users.controller.js";
-import { jsxRenderer } from "hono/jsx-renderer";
-import { Layout } from "./ui/layouts/Layout.js";
-import { getCookie } from "hono/cookie";
-import * as jwt from "hono/jwt";
+import { type UserDetails } from "./utils/jwt.js";
+import { provideDatabase } from "./middlewares/provideDatabase.js";
+import { provideCurrentUser } from "./middlewares/provideCurrentUser.js";
+import { provideDefaultLayout } from "./middlewares/provideDefaultLayout.js";
 
 type Variables = {
   db: DB;
+  currentUser: UserDetails | undefined;
 };
 
 export type AppEnv = {
@@ -19,21 +20,10 @@ export type AppEnv = {
 
 export const app = new Hono<AppEnv>();
 
-app.use(async (c, next) => {
-  c.set("db", db);
-  await next();
-});
-
+app.use(provideDatabase);
 app.use("/public/*", serveStatic({ root: "." }));
-
-app.use("*", (c, next) => {
-  return jsxRenderer(({ children }) => {
-    const token = getCookie(c, "token");
-    const user = token ? jwt.decode(token).payload : undefined;
-    // @ts-expect-error
-    return <Layout user={user}>{children}</Layout>;
-  })(c, next);
-});
+app.use(provideCurrentUser);
+app.use(provideDefaultLayout);
 
 app.get("/", (c) => c.render(<LandingPage />));
 
